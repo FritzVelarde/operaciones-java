@@ -13,8 +13,10 @@ public class DemoApplication {
     
     @RequestMapping("/calculadora")
     @ResponseBody
-    String operacion(@RequestParam String a,String b, String operacion) {
-    	if(entero(a)&&entero(b)){
+    String operacion(@RequestParam String a1,String b1, String operacion) {
+    	if(entero(a1)&&entero(b1)){
+    		int a = Integer.parseInt(a1);
+    		int b = Integer.parseInt(b1);
 	    	switch(operacion){//Single responsability
 	    	case "suma":
 	    		return ""+suma(a,b);
@@ -31,9 +33,11 @@ public class DemoApplication {
     		return "a y b deben ser enteros" ;	
     }
     boolean entero(String a){
-    	int foo = Integer.parseInt(a);
-    	if (foo.getClass().getName()=="java.lang.Integer")
+    	Integer.parseInt(a);
+    	if (a.getClass().getName()=="java.lang.Integer")
     		return true;
+    	else
+    		return false;
     }
     Integer suma(Integer a,Integer b){
     	return a+b;
