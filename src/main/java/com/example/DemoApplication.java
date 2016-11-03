@@ -1,7 +1,5 @@
 package com.example;
 
-import java.util.Date;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -15,8 +13,8 @@ public class DemoApplication {
     
     @RequestMapping("/calculadora")
     @ResponseBody
-    String operacion(@RequestParam Integer a,Integer b, String operacion) {
-    	if(a.getClass().getName()=="java.lang.Integer" && b.getClass().getName()=="java.lang.Integer"){
+    String operacion(@RequestParam String a,String b, String operacion) {
+    	if(entero(a)&&entero(b)){
 	    	switch(operacion){//Single responsability
 	    	case "suma":
 	    		return ""+suma(a,b);
@@ -32,7 +30,11 @@ public class DemoApplication {
     	else
     		return "a y b deben ser enteros" ;	
     }
-
+    boolean entero(String a){
+    	int foo = Integer.parseInt(a);
+    	if (foo.getClass().getName()=="java.lang.Integer")
+    		return true;
+    }
     Integer suma(Integer a,Integer b){
     	return a+b;
     }
