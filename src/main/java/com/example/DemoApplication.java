@@ -13,31 +13,33 @@ public class DemoApplication {
     
     @RequestMapping("/calculadora")
     @ResponseBody
-    String operacion(@RequestParam String a1,String b1, String operacion) {
-    	if(entero(a1)&&entero(b1)){
-    		int a = Integer.parseInt(a1);
-    		int b = Integer.parseInt(b1);
-	    	switch(operacion){//Single responsability
+    String operacion(@RequestParam String a,String b, String operacion) {
+    	if(entero(a)&&entero(b)){
+    		int aa = Integer.parseInt(a);
+    		int bb = Integer.parseInt(b);
+	    	switch(operacion){
 	    	case "suma":
-	    		return ""+suma(a,b);
+	    		return ""+suma(aa,bb);
 	    	case "resta":
-	    		return ""+resta(a,b);
+	    		return ""+resta(aa,bb);
 	    	case "multiplicacion":
-	    		return ""+multiplicacion(a,b);
+	    		return ""+multiplicacion(aa,bb);
 	    	case "division":
-	    		return ""+division(a,b);	
+	    		return ""+division(aa,bb);	
 	    	}
-			return "operacion no completada " ;
+			return "operacion no contemplada " ;
 	    }
     	else
     		return "a y b deben ser enteros" ;	
     }
     boolean entero(String a){
-    	Integer.parseInt(a);
-    	if (a.getClass().getName()=="java.lang.Integer")
-    		return true;
-    	else
-    		return false;
+    	try {
+    		Float.parseFloat(a);}
+    		catch(NumberFormatException ex)
+    		{
+    		return false;	
+    		}
+    	return true;
     }
     Integer suma(Integer a,Integer b){
     	return a+b;
